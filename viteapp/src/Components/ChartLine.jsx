@@ -30,7 +30,7 @@ ChartJS.register(
 
 
 
-export default function ChartLine({curve1, time}) {
+export default function ChartLine({curve1, time, min, max, unit, color}) {
 
     //-------------------- VALOR DE GRAFICA ---------------------------
 
@@ -39,15 +39,15 @@ export default function ChartLine({curve1, time}) {
         labels: time,
         datasets: [ // Cada una de las líneas del gráfico
             {
-                label: 'Temperature [°c]',
+                label: unit,
                 data: curve1,
                 tension: 0.3,
                 fill: false,
-                borderColor: 'rgb(105, 232, 63)',
-                backgroundColor: 'rgba(0, 254, 17, 0.5)',
+                borderColor: color,
+                backgroundColor: color,
                 pointRadius: 5,
-                pointBorderColor: '#43ef46',
-                pointBackgroundColor: '#43ef46',
+                pointBorderColor: color,
+                pointBackgroundColor: color,
             },    
         ],
     };
@@ -55,7 +55,8 @@ export default function ChartLine({curve1, time}) {
     let misoptions = {
         scales: {
             y: {
-                min: 0
+                min: min,
+                max: max
             },
             x: {
                 ticks: { color: 'rgb(92, 92, 92)' }

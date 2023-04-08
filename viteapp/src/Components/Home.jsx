@@ -25,7 +25,7 @@ import ChartLine from './ChartLine'
 
 export default function Home() {
 
-    const { mqttPublish, client, values, temperatureDefault, hallDefault, timeDefault } = useContext(mqContext); // Traigo todo de mqqConector para usar lo que necesite
+    const { mqttPublish, client, values, temperatureDefault, hallDefault, timeDefault, strengthDefault } = useContext(mqContext); // Traigo todo de mqqConector para usar lo que necesite
 
     const [input, setInput] = useState({
         led1: false,
@@ -54,7 +54,7 @@ export default function Home() {
         mqttPublish('esp32/update', 0, 'refresh'); //para saber si realmente encendio
         console.log('BOTONES');
     }
-    
+
     return (
         <>
             <Grid container sx={{ display: 'flex', justifyContent: 'center' }}> {/* {description, letter, title, value, unit, color} */}
@@ -108,15 +108,29 @@ export default function Home() {
             <Divider />
             <Grid container mt={3} mb={2} sx={{ display: 'flex', width: '100%', justifyContent: 'space-around', backgroundColor: 'none' }}>
                 {/* <Grid item ml={3} mr={1.5} xs={12} sm={12} md={5.5} sx={{ height: '350', backgroundColor: 'none' }}> */}
-                    {/* <LinesChart /> */}
-                    <ChartLine
-                        curve1 = {temperatureDefault}
-                        time = {timeDefault}
-                    />
+                {/* <LinesChart /> */}
+                <ChartLine
+                    curve1={temperatureDefault}
+                    time={timeDefault}
+                    min={0}
+                    max={100}
+                    unit='Temperature [°c]'
+                    color='#ff6b1b'
+                />
+
+                <ChartLine
+                    curve1={strengthDefault}
+                    time={timeDefault}
+                    min={-100}
+                    max={0}
+                    unit='Signal Strength [dBm]'
+                    color='#50ff1b'
+                />
+
                 {/* </Grid> */}
-                <Grid item mt={1} ml={1.5} mr={3} xs={12} sm={12} md={5.5} sx={{ height: 300, backgroundColor: 'none' }}>
+                {/* <Grid item mt={1} ml={1.5} mr={3} xs={12} sm={12} md={5.5} sx={{ height: 300, backgroundColor: 'none' }}>
                     <LinesChart2 />
-                </Grid>
+                </Grid> */}
             </Grid>
             <Divider />
             {/* <InfoDevice /> */}

@@ -92,9 +92,11 @@ const MqConnector = ({ children }) => {
     //----------------------- SOLO PARA LAS GRAFICAS ---------------------------------
     let temp = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     let hall = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    let strength = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     let time = ["00:00:00", "00:00:00", "00:00:00", "00:00:00", "00:00:00", "00:00:00", "00:00:00", "00:00:00", "00:00:00", "00:00:00", "00:00:00", "00:00:00", "00:00:00", "00:00:00", "00:00:00"];
     const [temperatureDefault, setTemperatureDefault] = useState(temp);
     const [hallDefault, setHallDefault] = useState(hall);
+    const [strengthDefault, setStrengthDefault] = useState(strength)
     const [timeDefault, setTimeDefault] = useState(time);
     // creo que actualiza la grafica porque traslada el refresco de estados de aca a LIneChart3 ...no se...
     //--------------------------------------------------------------------------------
@@ -142,13 +144,21 @@ const MqConnector = ({ children }) => {
                     let hora = new Date().toLocaleTimeString();
                     temp.shift();
                     temp.push(data.Temp);
+
                     time.shift();
                     time.push(hora);
+
                     hall.shift();
-                    hall.push(data.Hall)
+                    hall.push(data.Hall);
+
+                    strength.shift();
+                    strength.push(data.Sig);
+
                     setTemperatureDefault(temp);
-                    setTimeDefault(time);
                     setHallDefault(hall);
+                    setStrengthDefault(strength);
+                    setTimeDefault(time);
+                    
                     //-----------------------------------------------------
                 }
 
@@ -162,7 +172,7 @@ const MqConnector = ({ children }) => {
                         setValues({ temp: '--', hall: '--', hum: '--', sto: '--', sig: '--' })
                     }
                 }
-                
+
             });
         }
         return () => {  // esto para que no quede redundante
@@ -234,6 +244,7 @@ const MqConnector = ({ children }) => {
                 temperatureDefault,
                 timeDefault,
                 hallDefault,
+                strengthDefault,
                 disconnect,
                 connectStatus,
                 mqttConnect,
