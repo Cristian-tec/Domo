@@ -89,7 +89,7 @@ Ready! This is enough, you should be able to visualize the data.
 
 ## Authors
 
-* **Cristian Ganon** - *Full Stack developer * - [Cristian Ganon](https://portfolio-two-plum-34.vercel.app/) - *Built ReadME Template*
+* **Cristian Ganon** - *Full Stack developer * - [Cristian Ganon](https://portfolio-two-plum-34.vercel.app/) - 
 
 ## Acknowledgements
 
