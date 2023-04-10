@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { mqContext } from './mqContext'
 import mqtt from 'mqtt/dist/mqtt';
 
-const host = 'cristiantek.ml';
+//const host = 'cristiantek.ml';
+const host = import.meta.env.VITE_HOST_MQ;
 let clientId = `mqttjs_ + ${Math.random().toString(16).substr(2, 8)}`;
-const port = 8094; //me conecto por ssl
+const port = import.meta.env.VITE_PORT_MQ; //me conecto por ssl
 
 const url = `wss://${host}:${port}/mqtt`;
 const options = {
@@ -23,8 +24,8 @@ const options = {
     rejectUnauthorized: false
 };
 options.clientId = clientId;
-options.username = 'web_client';
-options.password = '121212';
+options.username = import.meta.env.VITE_USER_NAME_MQ;
+options.password = import.meta.env.VITE_PASSWORD_MQ;
 
 const topicSubs = 'esp32/output';
 const topicPubl = 'esp32/input';
